@@ -2,24 +2,14 @@ module ActsAsToken
 
   class Generator
 
-    attr_reader :token_config, :model_name, :field
+    attr_reader :token_config
 
-    def initialize(config, model_name, field)
+    def initialize(config)
       @token_config = config
-      @model_name   = model_name
-      @field        = field 
     end
 
     def generate_token
-      begin
-        _token = random_string
-      end until unique_token?(_token)
-      _token
-    end
-
-    def unique_token?(_token)
-      token_array = model_name.constantize.pluck(field)
-      token_array.all? { |token| _token != token }
+      token = random_string
     end
 
     def random_string
@@ -39,9 +29,11 @@ module ActsAsToken
       end
     end
 
-    def self.generate(config, model_name, field)
-      token_generator = new(config, model_name, field)
+    def self.generate(config)
+      token_generator = new(config)
       token_generator.generate_token
     end
+
   end
+
 end
