@@ -7,7 +7,7 @@ module ActsAsToken
     module ClassMethods
 
       def acts_as_token(field, options = {})
-        config = get_valid_configuration(options)
+        config = ActsAsToken.configurations[options[:type].try(:to_sym) || :default]
 
         before_save do |record|
           if record[field].blank?
@@ -17,14 +17,6 @@ module ActsAsToken
 
             record[field] = token
           end
-        end
-      end
-
-      def get_valid_configuration(options)
-        if options[:type]
-          config = ActsAsToken.configurations[options[:type].to_sym]
-        else
-          config = ActsAsToken.configurations[:default]
         end
       end
 

@@ -29,22 +29,9 @@ Really simple:
 
     end
 
-  You can even specify the configuration type. When no option 'type' is specified, it takes the default configuration.
+  You can even specify the option 'type' which loads the configuration from the 'config/initializers/acts_as_token.rb'.
 
-## Configuration
-
-  Add your own configurations to the /config/initializer/acts_as_token.rb:
-
-    ActsAsToken.configure :user do |code|
-      code.length            = 12                # sets the length of the token
-      code.use_chars         = :numeric          # sets the type of the token
-      code.include_chars     = ['$', '%']        # use these characters as well(does not ignore :use_chars). (default: none)
-      code.invalid_chars     = [0, 2, 4]         # do not use these characters. (default: none)
-      code.valid_chars       = [ 3, 4, 5, 6 ]    # use only these characters (ignores :use_chars). (default: none)
-      code.repeat_chars      = false             # characters should be repeated. (default: true)
-    end
-
-  and then to the model add:
+  In your model...
 
     class User < ActiveRecord::Base
 
@@ -52,4 +39,49 @@ Really simple:
 
     end
 
-  You can use :alpha (a-Z), :lower_alpha (a-z), :upper_alpha (A-Z), :numeric (0-9), :lower_alpha_numeric (a-z, 0-9), :upper_alpha_numeric (A-Z, 0-9), :alpha_numeric (a-Z, 0-9) as various token types. Default is :alpha_numeric.
+  In your config/initializers/acts_as_token.rb file...
+
+    ActsAsToken.configure :user do
+      code.length            = 12                # sets the length of the token
+      code.use_chars         = :numeric          # sets the type of the token
+      code.include_chars     = ['$', '%']        # use these characters as well(does not ignore :use_chars).
+      code.invalid_chars     = [0, 2, 4]         # do not use these characters.
+      code.valid_chars       = [ 3, 4, 5, 6 ]    # use only these characters (ignores :use_chars).
+      code.repeat_chars      = false             # characters should be repeated.
+    end
+
+  other options for use_chars:-
+  => :alpha (a-Z)
+  => :lower_alpha (a-z)
+  => :upper_alpha (A-Z)
+  => :numeric (0-9)
+  => :lower_alpha_numeric (a-z, 0-9)
+  => :upper_alpha_numeric (A-Z, 0-9)
+  => :alpha_numeric (a-Z, 0-9)
+
+  Note:- When no option 'type' is specified, it loads the default configuration.
+
+## Configuration
+
+  When there is no 'acts_as_token.rb' configuration file in the application, it loads the default configuration file.
+
+    ActsAsToken.configure do |code|
+      code.length            = 10                  # sets the length of the token
+      code.use_chars         = :alpha_numeric      # sets the type of the token
+      code.include_chars     = []                  # use these characters as well(does not ignore :use_chars).
+      code.invalid_chars     = []                  # do not use these characters.
+      code.valid_chars       = []                  # use only these characters (ignores :use_chars).
+      code.repeat_chars      = true                # characters should be repeated.
+    end
+
+## Contribution
+
+  1) Fork it
+  2) Create your feature branch (git checkout -b my-new-feature)
+  3) Commit your changes (git commit -am 'Add some feature')
+  4) Push to the branch (git push origin my-new-feature)
+  5) Create new Pull Request
+
+
+
+

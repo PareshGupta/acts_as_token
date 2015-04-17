@@ -14,7 +14,7 @@ module ActsAsToken
   class << self
 
     def configure(field = 'default')
-      config = configurations[:default].try(:dup) || Configuration.new
+      config = configurations[field.to_sym] || configurations[:default].try(:dup) || Configuration.new
       yield config
       configurations[field.to_sym] = config
     end
