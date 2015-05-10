@@ -52,11 +52,17 @@ Really simple:
 
   other options for use_chars:-
   => :alpha (a-Z)
+
   => :lower_alpha (a-z)
+
   => :upper_alpha (A-Z)
+
   => :numeric (0-9)
+
   => :lower_alpha_numeric (a-z, 0-9)
+
   => :upper_alpha_numeric (A-Z, 0-9)
+  
   => :alpha_numeric (a-Z, 0-9)
 
   Note:- When no option 'type' is specified, it loads the default configuration.
@@ -76,12 +82,12 @@ Really simple:
 
 ## Contribution
 
-  1) Fork it
-  2) Create your feature branch (git checkout -b my-new-feature)
-  3) Commit your changes (git commit -am 'Add some feature')
-  4) Push to the branch (git push origin my-new-feature)
-  5) Create new Pull Request
+  1) Fork it.
 
+  2) Create your feature branch (git checkout -b my-new-feature).
 
+  3) Commit your changes (git commit -am 'Add some feature').
 
+  4) Push to the branch (git push origin my-new-feature).
 
+  5) Create new Pull Request.
